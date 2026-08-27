@@ -1,4 +1,4 @@
-package Sol;
+
 
 class Programmers_Greedy_1 {
 	/*

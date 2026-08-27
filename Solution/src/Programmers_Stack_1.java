@@ -1,5 +1,3 @@
-package Sol;
-
 import java.util.ArrayDeque;
 import java.util.Collections;
 import java.util.Queue;

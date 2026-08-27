@@ -1,4 +1,3 @@
-package Sol;
 
 import java.util.PriorityQueue;
 
