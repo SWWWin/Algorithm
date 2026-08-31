@@ -1,4 +1,4 @@
-
+import javax.xml.stream.events.StartDocument;
 
 class Programmers_Greedy_1 {
 	/*
@@ -15,45 +15,46 @@ class Programmers_Greedy_1 {
 	 */
 	
 	public static void main(String[] args) {
-		System.out.println(solution("JEROEN"));
+		System.out.println(solution("AZAAAZA"));
 	}
     public static int solution(String name) {
-
-        int answer = 0;
-        int[] shiftDistance = new int[name.length()];
-        boolean haveZero = false;
-        for(int i = 0; i < name.length(); i ++) {
-        	int shiftfront = name.charAt(i) - 'A';
-        	int shiftBack = 'Z' - name.charAt(i) + 1;
-        	
-        	shiftDistance[i] = Math.min(shiftfront, shiftBack);
-        	answer += shiftDistance[i];
-        	if(shiftDistance[i] == 0) haveZero = true;
-        }
-        
-        
-        int minStright = name.length() - 1;
-        int minSum = minStright;
-        
-    	if(haveZero) {
-	        for(int i = 0; i < name.length(); i ++) {
-	
-	        	int next = i + 1;
-	    		while(next < name.length() && shiftDistance[next] == 0) {
-	    			next ++;
-	    		}
-	
-	        	int rightUTurn = i * 2 + (name.length() - next);
-	        	int leftUTurn = 2 * (name.length() - next) + i;
-	        	
-	        	int minTurn = Math.min(rightUTurn, leftUTurn);
-	        	minSum = Math.min(minSum, minTurn);
-	    	
-	            
-	        }
+    	int answer = 0;
+    	int N = name.length();
+    	
+    	boolean hasA = false;
+    	for(int n = 0; n < N; n ++) {
+    		int shiftUp = name.charAt(n) - 'A';
+    		int shiftDown = 'Z' - name.charAt(n) + 1;
+    		
+    		answer += Math.min(shiftDown, shiftUp);
     	}
-        answer += minSum;
-        return answer;
+    	
+    	
+    	int minWay = N - 1;
+    	
+        	int firstA = 0;
+        	while(firstA < N) {
+        		
+        			int lastA = firstA + 1;
+        			while(lastA < N && name.charAt(lastA) == 'A') {
+        				lastA ++;
+        			}
+        			
+        			
+        			minWay = Math.min(minWay, firstA * 2 + N - lastA);
+        			minWay = Math.min(minWay, (N - lastA) * 2 + firstA);
+        			
+        		
+        		firstA ++;
+        	}
+        	
+        	
+    	
+    	
+    	
+    	answer += minWay;
+    	
+     	return answer;
     }
 }
 

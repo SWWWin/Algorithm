@@ -13,35 +13,18 @@ public class Programmers_Greedy_2 {
 	
 	public static int solution(int[] people, int limit) {
         int answer = 0;
-        
-        ArrayList<Integer> peopleList = new ArrayList<>();
-        for(int p: people) {
-        	peopleList.add(p);
-        }
-        
-        Collections.sort(peopleList);
-        
-        
-        int start = 0;
-        int end = people.length - 1;
-        while(true) {
-        	if(start > end) {
-        		break;
-        	} else if(start == end) {
-        		answer ++;
-        		break;
+        Arrays.sort(people);
+        int length = people.length;
+        int left = 0;
+        int right = length - 1;
+        while(left <= right) {
+        	if(people[left] + people[right] <= limit) {
+        		left ++;
         	}
-        	if(peopleList.get(end) + peopleList.get(start) <= limit) {
-        		answer ++;
-        		start ++;
-        		end --;
-        		continue;
-        	} else {
-        		answer ++;
-        		end --;
-        	}
+        	
+        	right --;
+        	answer ++;
         }
-        
         return answer;
-    }
+	}
 }

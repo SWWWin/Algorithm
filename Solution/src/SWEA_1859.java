@@ -28,14 +28,13 @@ public class SWEA_1859 {
 			
 			int max = salePrice[N - 1];
 			for(int i = N - 2; i >= 0; i --) {
-				if(max > salePrice[i]) {
-					answer += max - salePrice[i];
-				} else if(max < salePrice[i]){
+				if(max < salePrice[i]) {
 					max = salePrice[i];
+					continue;
 				}
 				
+				answer += max - salePrice[i];
 			}
-			
 			System.out.println("#" + test_case + " " + answer);
 			
 		}
