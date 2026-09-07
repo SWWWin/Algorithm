@@ -34,11 +34,9 @@ public class S6808 {
 					index ++;
 				}
 			}
-			
-			for(int i = 0; i < 9; i ++) {
-				visited = new boolean[9];
-				dfs(i, 0, 0);
-			}
+
+			visited = new boolean[9];
+			dfs(0, 0);
 			
 			int q = 1;
 			
@@ -49,32 +47,26 @@ public class S6808 {
 		}
 		
 	}
-	private static void dfs(int i, int depth, int score) {
-		 
-		if(depth == 8) {
-			score += ky_card[depth] > iy_card[i]? ky_card[depth] + iy_card[i] : 0;
-			if(score >= 86) {
-				win ++;
+	private static void dfs(int depth, int score) {
+		if (depth == 9) {
+			if (score >= 86) {
+				win++;
 			}
 			return;
 		}
-		
-		if(visited[i]) return;
-		
-		
-		
-		score += ky_card[depth] > iy_card[i]? ky_card[depth] + iy_card[i] : 0;
-		visited[i] = true;
-		
-		for(int k = 0; k < 9; k ++) {
-			if(!visited[k]) {
-				dfs(k, depth + 1, score);
+
+		for (int i = 0; i < 9; i++) {
+			if (visited[i]) continue;
+
+			visited[i] = true;
+
+			if (ky_card[depth] > iy_card[i]) {
+				dfs(depth + 1, score + ky_card[depth] + iy_card[i]);
+			} else {
+				dfs(depth + 1, score);
 			}
-			
-			
+
+			visited[i] = false;
 		}
-		
-		visited[i] = false;
-		
 	}
 }
