@@ -36,7 +36,7 @@ public class S6808 {
 			}
 
 			visited = new boolean[9];
-			dfs(0, 0);
+			permutation(0, 0, 0, 0);
 			
 			int q = 1;
 			
@@ -47,26 +47,42 @@ public class S6808 {
 		}
 		
 	}
-	private static void dfs(int depth, int score) {
-		if (depth == 9) {
-			if (score >= 86) {
-				win++;
+	
+	static void permutation(int cnt, int flag, int kScore, int iScore) {
+		if(cnt == 9) {
+			if(kScore > iScore) {
+				++win;
 			}
 			return;
 		}
-
-		for (int i = 0; i < 9; i++) {
-			if (visited[i]) continue;
-
-			visited[i] = true;
-
-			if (ky_card[depth] > iy_card[i]) {
-				dfs(depth + 1, score + ky_card[depth] + iy_card[i]);
-			} else {
-				dfs(depth + 1, score);
-			}
-
-			visited[i] = false;
+		for (int i = 0; i < 9; i++) { // i: 선택할 수의 인덱스
+			if((flag & 1 << i) != 0) continue; // i위치의 비트가 켜있다. 그러면 사용 중인 수이니 패스
+			
+			int sum = ky_card[cnt] + iy_card[i];
+			permutation(cnt + 1, flag | 1 << i, kScore + ky_card[cnt]>iy_card[i]? sum: 0, iScore+(ky_card[cnt] < iy_card[i]? sum: 0));
 		}
 	}
+	
+//	private static void dfs(int depth, int score) {
+//		if (depth == 9) {
+//			if (score >= 86) {
+//				win++;
+//			}
+//			return;
+//		}
+//
+//		for (int i = 0; i < 9; i++) {
+//			if (visited[i]) continue;
+//
+//			visited[i] = true;
+//
+//			if (ky_card[depth] > iy_card[i]) {
+//				dfs(depth + 1, score + ky_card[depth] + iy_card[i]);
+//			} else {
+//				dfs(depth + 1, score);
+//			}
+//
+//			visited[i] = false;
+//		}
+//	}
 }

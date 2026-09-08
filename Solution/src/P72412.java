@@ -26,11 +26,12 @@ public class P72412 {
         for(int i = 0; i < info.length; i ++) {
         	String[] infoSplit = info[i].split(" ");  
         	addMap(0, infoSplit);
-        	
-        	for(ArrayList<Integer> scores : map.values()) {
-        	    Collections.sort(scores);
-        	}
+        
         }
+        
+        for(ArrayList<Integer> scores : map.values()) {
+    	    Collections.sort(scores);
+    	}
         
         for(int q = 0; q < query.length; q ++) {
         	String[] querySplit = query[q].replace(" and ", " ").split(" ");
@@ -47,7 +48,6 @@ public class P72412 {
         		continue;
         	}
 
-        	Collections.sort(scores);
         	
         	int left = 0;
         	int right = scores.size();
