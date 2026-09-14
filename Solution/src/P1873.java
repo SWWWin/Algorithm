@@ -3,16 +3,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-import com.sun.imageio.plugins.common.InputStreamAdapter;
 
 public class P1873 {
-	static int dr[] = {-1, 0, 1, 0};// ÀÌµ¿ ¹æÇâ¿¡ µû¸¥ µ¨Å¸
+	static int dr[] = {-1, 0, 1, 0};// ï¿½Ìµï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸
 	static int dc[] = {0, 1, 0, -1};
 	static final String TANK_SYMBOLS = "^>v<";
 	static final String DIRS = "URDL";
 	
-	static int H, W, r, c, dir; // ¸ÊÀÇ Å©±â ÀüÂ÷ÀÇÀ§Ä¡, ¹æÇâ
-	static char[][] map; // °ÔÀÓ ¸Ê
+	static int H, W, r, c, dir; // ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡, ï¿½ï¿½ï¿½ï¿½
+	static char[][] map; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
