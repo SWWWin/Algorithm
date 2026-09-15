@@ -9,26 +9,36 @@ public class P178870 {
 		System.out.println(Arrays.toString(solution(sequence1, 5)));
 	}
 	
-	public static int[] solution(int[] sequence, int k) {
-        int[] answer = new int[2];
 
-		int N = sequence.length;
-		int[] prefix = new int[N + 1];
+    public static int[] solution(int[] sequence, int k) {
+        int left = 0;
+        int sum = 0;
 
-		for(int i = 1; i <= N; i ++) {
-			prefix[i] = sequence[i - 1] + prefix[i - 1];
-		}
+        int bestLeft = 0;
+        int bestRight = sequence.length - 1;
+        int bestLen = sequence.length + 1;
 
-		for(int len = 1; len <= N; len ++) {
-			for(int start = 0; start <= N - len; start ++) {
-				System.out.println(start + "  " + len);
-				if(prefix[start + len] - prefix[start] == k) {
-					answer[0] = start;
-					answer[1] = start + len - 1;
-					return answer;
-				}
-			}
-		}
-		return answer;
+        for (int right = 0; right < sequence.length; right++) {
+
+            sum += sequence[right];
+
+            while (sum > k) {
+                sum -= sequence[left];
+                left++;
+            }
+
+            if (sum == k) {
+                int len = right - left + 1;
+
+                if (len < bestLen) {
+                    bestLen = len;
+                    bestLeft = left;
+                    bestRight = right;
+                }
+            }
+        }
+
+        return new int[]{bestLeft, bestRight};
     }
 }
+
