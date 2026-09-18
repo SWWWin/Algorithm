@@ -16,7 +16,7 @@ public class S5648 {
  
     static int[] dx = {0, 0, -1, 1};
     static int[] dy = {1, -1, 0, 0};
- 
+    
     // 좌표 -2000 ~ 2000
     static final int OFFSET = 2000;
     static final int SIZE = 4001;
@@ -39,7 +39,7 @@ public class S5648 {
  
             int N = Integer.parseInt(br.readLine());
  
-            ArrayList<Atom> atoms = new ArrayList<>(N);
+            ArrayList<Atom> atoms = new ArrayList<>(N); // 살아있는 원자들 리스트
  
             for (int i = 0; i < N; i++) {
                 StringTokenizer st = new StringTokenizer(br.readLine());
