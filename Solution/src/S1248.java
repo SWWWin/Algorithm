@@ -1,12 +1,12 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayDeque;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 /*
- * ºÎ¸ğ°¡ ¹«¾ùÀÎÁö °è¼Ó Ã£¾Æ´Ù³à¾ß ÇÔ -> ±×³É ºÎ¸ğ¸¸ È®ÀÎÇÏ¸é µÇÁö ¾ÊÀ»±î?
- * ÀÎµ¦½º: ÀÚ½Ä - ¹è¿­[ÀÎµ¦½º] - ºÎ¸ğÀÇ ÀÎµ¦½º
- * ºÎ¸ğÀÇ ÀÎµ¦½º¿¡ °£ ´ÙÀ½ ´Ù½Ã dfs
+ì—£ì§€ë§ˆë‹¤ ê°€ì§€ê³  ìˆëŠ” ìì‹ì„ 2ì°¨ì› ë°°ì—´ì— ë“±ë¡í•˜ì—¬ ë°˜ë³µí•˜ì—¬ ì„œì¹˜
  */
 public class S1248 {
 	public static void main(String[] args) throws NumberFormatException, IOException {
@@ -21,22 +21,82 @@ public class S1248 {
 			int E = Integer.parseInt(st.nextToken());
 			int a = Integer.parseInt(st.nextToken());
 			int b = Integer.parseInt(st.nextToken());
-			int[] parents = new int[E * 2];
-			
-			for(int i = 1; i < E * 2; i ++) {
-				
+			int[][] childs = new int[V + 1][2];
+			int[] parents = new int[V + 1];
+
+			st = new StringTokenizer(br.readLine());
+
+			for(int i = 1; i <= E; i ++) {
+				int parent = Integer.parseInt(st.nextToken());
+				int child = Integer.parseInt(st.nextToken());
+
+				if(childs[parent][0] == 0) {
+					childs[parent][0] = child;
+				} else {
+					childs[parent][1] = child;
+				}
+
+				parents[child] = parent;
 			}
-			
-			
-			
-			
-			int idxA = a; 
-			while(idxA == 1) {
-				int idxB = b;
-				while(idxB == 1) {
-					
+
+			int same = 0;
+
+			// ì²˜ìŒ êµ¬í˜„ ë‹¹ì‹œ - V ^ 2ì´ê¸° ë•Œë¬¸ì— ë¦¬íŒ©í† ë§í•˜ì˜€ë‹¤
+//			for(int i = a; i != 0; i = parents[i]) {
+//				for(int j = b; j != 0; j = parents[j]) {
+//					if(i == j) {
+//						same = i;
+//						break;
+//					}
+//				}
+//
+//				if(same != 0) {
+//					break;
+//				}
+//			}
+
+
+			// ë¦¬íŒ©í† ë§ í›„
+			boolean[] visited = new boolean[V + 1];
+			for(int i = a; i != 0; i = parents[i]) {
+				visited[i] = true;
+			}
+
+			for(int i = b; i != 0 ; i = parents[i]) {
+				if(visited[i]) {
+					same = i;
+					break;
 				}
 			}
+
+			int size = getSize(same, childs);
+
+			StringBuilder sb = new StringBuilder();
+			sb.append("#").append(t).append(" ").append(same).append(" ").append(size);
+			System.out.println(sb);
 		}
+	}
+
+	private static int getSize(int same, int[][] childs) {
+		Queue<Integer> queue = new ArrayDeque<>();
+		queue.add(same);
+		int size = 0;
+		while(!queue.isEmpty()) {
+			int idx = queue.poll();
+			size ++;
+
+			if(idx >= childs.length) {
+				continue;
+			}
+			if(childs[idx][0] != 0) {
+				queue.add(childs[idx][0]);
+			}
+
+			if(childs[idx][1] != 0) {
+				queue.add(childs[idx][1]);
+			}
+		}
+
+		return size;
 	}
 }

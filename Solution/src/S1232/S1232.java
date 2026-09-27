@@ -1,21 +1,23 @@
+package S1232;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 /*
- * ÀÌÁø Æ®¸®ÀÌ±â ¶§¹®¿¡ Æ®¸®ÀÇ °£¼± ¼ö°¡ ¸¹Áö ¾Ê¾Æ ÀÎÁ¢ ¸®½ºÆ®·Î ±¸ÇöÇÏ¿´´Ù.
+ * ï¿½ï¿½ï¿½ï¿½ Æ®ï¿½ï¿½ï¿½Ì±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½.
  */
 
 class Node {
 	String value;
 	int left;
 	int right;
-	
+
 	public Node(String value) {
 		super();
 		this.value = value;
 	}
-	
+
 }
 
 
