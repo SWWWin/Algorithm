@@ -1,4 +1,7 @@
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Queue;
 
 public class P7603 {
@@ -9,20 +12,33 @@ public class P7603 {
 	public static long solution(int[] a, int[][] edges) {
         long answer = 0;
         int N = a.length;
+        long[] arr = new long[N];
+        List<Integer>[] tree = new ArrayList[N];
         int[] leafCheck = new int[N];
         boolean[] visited = new boolean[N];
-        long[] weight = new long[N];
-       
+
+        for(int n = 0; n < N; n ++) {
+        	tree[n] = new ArrayList<>();
+        }
+        
+
         long add = 0;
         for (int i = 0; i < N; i++) {
-            weight[i] = a[i];
-            add += weight[i];
+        	add += a[i];
+        	arr[i] = a[i];
         }
+        
         if (add != 0) return -1;
         
         for(int i = 0; i < edges.length; i ++) {
-        	leafCheck[edges[i][0]] ++;
-        	leafCheck[edges[i][1]] ++;
+        	int from = edges[i][0];
+        	int to = edges[i][1];
+        	
+        	tree[from].add(to);
+        	tree[to].add(from);
+        	
+        	leafCheck[from] ++;
+        	leafCheck[to] ++;
         }
         
         Queue<Integer> q = new ArrayDeque<>();
@@ -38,28 +54,19 @@ public class P7603 {
             int now = q.poll();
             if (visited[now]) continue;
 
-            visited[now] = true;
+	        visited[now] = true;
+            
 
-            for (int i = 0; i < edges.length; i++) {
-                int next = -1;
 
-                if (edges[i][0] == now) {
-                    next = edges[i][1];
-                } else if (edges[i][1] == now) {
-                    next = edges[i][0];
-                }
-
-                if (next == -1 || visited[next]) continue;
-
-                answer += Math.abs(weight[now]);
-                weight[next] += weight[now];
-                weight[now] = 0;
-
-                leafCheck[next]--;
-
-                if (leafCheck[next] == 1) {
-                    q.offer(next);
-                }
+            for(int next: tree[now]) {
+            	if(visited[next]) continue;
+            	
+            	arr[next] += arr[now];
+            	answer += Math.abs(arr[now]);
+            	
+            	leafCheck[next] --;
+            	
+            	if(leafCheck[next] == 1) q.offer(next);
             }
         }
         
