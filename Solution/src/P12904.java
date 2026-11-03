@@ -9,7 +9,7 @@ public class P12904 {
 	public static int solution(String s)
     {
         int answer = s.length();
-
+        StringBuilder rev = new StringBuilder(s).reverse();
         for(int i = answer; i >= 1; i --) {
         	for(int start = 0; start <= answer - i; start ++) {
         		boolean isSame = true;
@@ -21,9 +21,10 @@ public class P12904 {
 //        		}
         		
         		int p = s.substring(start, start + i).hashCode();
-        		int r = s.substring(start + i, start + i - j + 1).hashCode();
+        		int r = rev.substring(answer - start - i, answer - start).hashCode();
         		
-        		if(isSame) {
+        		
+        		if(p == r) {
         			answer = i;
         			return answer;
         		}
