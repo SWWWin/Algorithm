@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
+import sun.security.krb5.internal.HostAddress;
+
 // dfs로 후보 검색
 // bfs로 횟수 검색
 
@@ -43,19 +45,26 @@ public class C2019H1PM2 {
 				map[r][c] = Integer.parseInt(st.nextToken());
 				if(map[r][c] == 0) {
 					visited[r][c] = true;
+				} else if(map[r][c] == 2) {
+					locs.add(new Location(r, c));
 				}
 			}
 		}
 		
+		HashSet<Location> pickHos = dfs(0, new HashSet<>());
 		
 		
-	}
-	
-	public static int dfs() { // 후보 검색 후 횟수 검색으로 넘김
 		
 	}
 	
-	public static int bfs() {
-		PriorityQueue<Location> 
+	public static HashSet<Location> dfs(int depth, HashSet<Location> pickHos) { // 후보 검색 후 횟수 검색으로 넘김
+		
+		if(depth == M) {
+			return pickHos;
+		}
+		
+		for(int i = 0; )
 	}
+	
+	
 }
